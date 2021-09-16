@@ -25,6 +25,7 @@ router.get('/', (req, res, next) => {
   res.write(
     '<a href="ta01/stretch-3">Stretch 3 (Add two number inputs together)</a></br>'
   );
+  res.write('<p>Hi. This is a test of github.</p>');
   res.write('</body>');
   res.write('</html>');
   return res.end(); // Return so you don't execute remaining code outside of if statement
