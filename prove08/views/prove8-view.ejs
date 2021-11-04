@@ -1,4 +1,4 @@
-<% include ../includes/header.ejs %>
+<% include ../../includes/header.ejs %>
   <title>
     <%= title %>
   </title>
@@ -7,10 +7,18 @@
   </head>
 
   <body>
-    <% include ../includes/nav.ejs %>
+    <% include ../../includes/nav.ejs %>
       <div class="container">
-        
-        <h1>JSON Items</h1>
+        <form action="../../controllers/prove8-controller" method="POST" class="form-inline">
+          <input type="text" name="searchValue" placeholder="Search by Title" class="form-control" style="width:300px">
+          <button type="submit" class="btn btn-primary">Search</button>
+          <% if (searchedValue.length> 0) { %>
+            <a type="button" href="/views/pages/ta03.ejs" class="btn btn-default">Clear Search Results</a>
+            <h3>Showing search results for: <%= searchedValue %>
+            </h3>
+            <% } %>
+        </form>
+        <h1>JSON Results</h1>
         <% for(var i=0; i<data.length; i++) {%>
           <% if(i % 3==0) { %>
             <div class="container">
@@ -36,14 +44,8 @@
 
       </div>
       <form class="actions container">
-        <% if (hasNextPage) { %>
-        <a href="?page=<%= nextPage %>" class="active">Next Page</a>
-        <% } %>
-        <% if (hasPreviousPage) { %>
-        <a href="?page=<%= previousPage %>" class="active">Previous Page</a>
-        <% } %> <br>
         <% for(var i=1; i <=numPages; i++) { %>
-          <a href="?page=<%= i %><%= (searchedValue) ? `&searchValue=${searchedValue}` :  "" %>" class="btn <%= (currentPage==i) ? 'btn-primary' : 'btn-default' %>">
+          <a href="?page=<%= i %><%= (searchedValue) ? `&searchValue=${searchedValue}` :  "" %>" class="btn <%= (page==i) ? 'btn-primary' : 'btn-default' %>">
             <%= i %>
           </a>
           <% } %>
